@@ -49,24 +49,34 @@
 
 		<div class="row-fluid" style="text-align:center;margin-top:5rem;">
 		  <div class="span1 offset1" style="background-color:#6792E6;">
+		  	+ 5 km
 		  </div>
 		  <div class="span1" style="background-color:rgb(125,144,212);">
+		  	1 km
 		  </div>
 		  <div class="span1" style="background-color:rgb(135,143,203);">
+		  	500 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(146,142,194);">
+		  	250 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(157,141,185);">
+		  	100 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(168,140,175);">
+		  	75 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(179,139,166);">
+		  	50 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(190,138,157);">
+		  	25 m
 		  </div>
 		  <div class="span1" style="background-color:rgb(200,137,148);">
+		  	10 m
 		  </div>
 		  <div class="span1" style="background-color:#DE8782;">
+		  	- 5 m
 		  </div>
 		</div>
         </div>
@@ -74,12 +84,21 @@
         
         
         
-        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 		<script src="js/vendor/bootstrap.min.js"></script>
+		
+		
+		<script>
+        	getMouse();
+        	getCats();
+        	calculateDistance(getMouse(), getCats());
+        </script>
+		
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
