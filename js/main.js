@@ -47,7 +47,7 @@ function getCats() {
  * Calcul de la distance à vol d'oiseaux 
  */
 function calculateDistance(address1, address2) {
-	mesure = (google.maps.geometry.spherical.computeDistanceBetween(address1, address2) / 1000).toFixed(2);
+	mesure = google.maps.geometry.spherical.computeDistanceBetween(address1, address2);
 	console.log("distance entre le client et le shop : " + mesure);
 }
 
@@ -114,5 +114,8 @@ function refreshCatsScreen() {
 		$(".row-fluid .btn").removeClass("btn-primary");
 		$(".row-fluid .btn").addClass("btn-danger");
 	}
-	$(".row-fluid button").html(mesure + " mètres");
+	if ( mesure < 1000) 
+		$(".row-fluid button").html(mesure.toFixed(2) + " m");
+	else
+		$(".row-fluid button").html((mesure/1000).toFixed(2) + " km");
 }
