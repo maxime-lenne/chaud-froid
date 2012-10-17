@@ -23,7 +23,11 @@ Sleek, intuitive, and powerful front-end framework for faster and easier web dev
 * Homepage: [http://twitter.github.com/bootstrap/](http://twitter.github.com/bootstrap/)
 
 
-## Quick start
+## Demo
+
+* Followhat: [http://experiments.followhat.com/chaud-froid/](http://experiments.followhat.com/chaud-froid/)
+
+
 
 ## Features
 
