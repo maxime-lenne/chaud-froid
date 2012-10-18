@@ -1,13 +1,19 @@
-
 /**
  * @author maximelenne
  * 
  * 
  */
+
+
+$(function() {
+	
+	
+	
 var mousePosition;
 var catsPosition;
 var mesure;
 var geocoder = new google.maps.Geocoder();
+
 
 function getMouse() {
 	mousePosition = new google.maps.LatLng(50.6331543, 3.0433570000000145);
@@ -24,6 +30,7 @@ function getCats() {
 			console.log("Position du chat (geolocalisation HTML5)" + catsPosition);
 			calculateDistance(mousePosition, catsPosition);
 			refreshCatsScreen();
+			return catsPosition;
 		}, function(){
 			// Google loader api
 			// require <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -119,3 +126,29 @@ function refreshCatsScreen() {
 	else
 		$(".row-fluid button").html((mesure/1000).toFixed(2) + " km");
 }
+
+
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) window.console.log(message);
+    };
+
+    // Flash fallback logging - don't include this in production
+    WEB_SOCKET_DEBUG = true;
+    Pusher.channel_auth_transport = 'jsonp';
+  	Pusher.channel_auth_endpoint = 'php/pusher_auth.php'; 
+
+    var pusher = new Pusher('0a3b796957d21bc66fbd');
+    var channel = pusher.subscribe('private-channel');
+    var user = "chats-" + Math.random().toString(3).substring(2,15);
+    var type = "chat";
+    var data = JSON.stringify([user,type]);
+    
+    channel.bind('client-someeventname', function(data) {
+      alert(data);
+    });
+    
+    
+    
+    
+});
