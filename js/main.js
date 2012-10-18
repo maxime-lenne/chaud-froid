@@ -13,7 +13,7 @@ var mousePosition;
 var catsPosition;
 var mesure;
 var geocoder = new google.maps.Geocoder();
-
+var socket = io.connect('http://localhost:8080/');
 
 function getMouse() {
 	mousePosition = new google.maps.LatLng(50.6331543, 3.0433570000000145);
@@ -128,15 +128,17 @@ function refreshCatsScreen() {
 }
 
 
-var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+
+socket.on('news', function (data) {
+	console.log(data);
+	socket.emit('my other event', { my: 'data' });
+});
   
 function pushPositionWs() {
-	
+	socket.emit('send:coords', { user: 'max', lat: catsPosition.lat(), lng: catsPosition.lng() });
 }
+getMouse();
+getCats();
 
     // Enable pusher logging - don't include this in production
     /*Pusher.log = function(message) {
