@@ -30,7 +30,7 @@ function getCats() {
 			console.log("Position du chat (geolocalisation HTML5)" + catsPosition);
 			calculateDistance(mousePosition, catsPosition);
 			refreshCatsScreen();
-			return catsPosition;
+			pushPositionWs();
 		}, function(){
 			// Google loader api
 			// require <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -128,13 +128,25 @@ function refreshCatsScreen() {
 }
 
 
+var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+  
+function pushPositionWs() {
+	
+}
+
     // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
+    /*Pusher.log = function(message) {
       if (window.console && window.console.log) window.console.log(message);
     };
 
     // Flash fallback logging - don't include this in production
     WEB_SOCKET_DEBUG = true;
+    
+    
     Pusher.channel_auth_transport = 'jsonp';
   	Pusher.channel_auth_endpoint = 'php/pusher_auth.php'; 
 
@@ -148,7 +160,7 @@ function refreshCatsScreen() {
       alert(data);
     });
     
-    
+    */
     
     
 });
