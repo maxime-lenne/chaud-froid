@@ -20,16 +20,23 @@ function handler(request, response) {
 // listen for incoming connections from client
 io.sockets.on('connection', function (socket) {
  
+  //position par défault de la souris
+  socket.emit('load:coordsMouse', { user: 'max', type: 'mouse', lat: "50.6331543", lng: "3.0433570000000145"});
+  
+  socket.on('send:coordsMouse', function(data) {
+  	console.log(data);
+  	socket.emit('load:coordsMouse', data);
+  });
+  
   // start listening for coords
   socket.on('send:coords', function (data) {
  	console.log(data);
     // broadcast your coordinates to everyone except you
     socket.broadcast.emit('load:coords', data);
+    socket.emit('load:coords', data);
   });
-  socket.emit('news', { hello: 'world' });
-  socket.on('geolocalisation', function (data) {
-    console.log(data);
-  });
+  
+  
 });
  
 // starts app on specified port
