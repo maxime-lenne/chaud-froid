@@ -47,20 +47,7 @@ $(function() {
 		socket.on('load:coordsMouse', function (data) {
 			mousePosition = new google.maps.LatLng(data['lat'], data['lng']);
 			console.log("Position de la souris" + mousePosition);
-			return mousePosition;
 		});
-	}
-	function successLocalisationMouse() {
-		mousePosition = geolocalisationHTML5(geoloc);
-	}
-	function geolocaliseMouse() {
-		if (geo) {
-			geo.watchPosition(successLocalisationMouse, mousePosition =geolocalisationIP());
-		}
-		else {
-			mousePosition = geolocalisationIP();
-		}
-		console.log("Position souris :" + mousePosition);
 	}
 	
 	
@@ -173,9 +160,12 @@ $(function() {
 	 */
 	
 	
-	socket.on('load:coords', function (data) {
-		console.log(data);
-	});
+	socket.on('load:coordsMouse', function (data) {
+			mousePosition = new google.maps.LatLng(data['lat'], data['lng']);
+			console.log("Position de la souris" + mousePosition);
+			calculateDistance(mousePosition, catsPosition);
+			refreshCatsScreen();
+		});
 	  
 	function pushPositionCats() {
 		socket.emit('send:coords', { user: 'max', type: 'cats', lat: catsPosition.lat(), lng: catsPosition.lng(), mesure: mesure });
