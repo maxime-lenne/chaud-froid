@@ -14,7 +14,7 @@ $(function() {
 	var mesure;
 	var geocoder = new google.maps.Geocoder();
 	var geo = navigator.geolocation;
-	var socket = io.connect('http://chaud-froid.maximelenne.c9.io:8080');
+	var socket = io.connect('http://localhost:8080/');
 	
 	
 	

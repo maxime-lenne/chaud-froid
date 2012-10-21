@@ -3,7 +3,7 @@ var http = require('http');
 var static = require('node-static');
 var app = http.createServer(handler);
 var io = require('socket.io').listen(app);
-io.set("origins","*");
+//io.set("origins","*");
 // define port
 var port = 8080;
  
