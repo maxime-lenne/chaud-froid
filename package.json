@@ -2,7 +2,8 @@
   "name": "chaud-froid",
   "version": "1.0",
   "dependencies": {
-    "socket.io": "*"
+    "socket.io": "*",
+    "node-static": "*"
   },
   "engines": {
     "node": "0.8.x",

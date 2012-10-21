@@ -1,6 +1,6 @@
 // including libraries
 var http = require('http');
-//var static = require('node-static');
+var static = require('node-static');
 var app = http.createServer(handler);
 var io = require('socket.io').listen(app);
 io.set("origins","*");
@@ -8,12 +8,12 @@ io.set("origins","*");
 var port = 8080;
  
 // make html, js & css files accessible
-//var files = new static.Server('./server');
+var files = new static.Server('./');
  
 // serve files on request
 function handler(request, response) {
     request.addListener('end', function() {
-        //files.serve(request, response);
+        files.serve(request, response);
     });
 }
 
