@@ -4,10 +4,8 @@
  * 
  */
 
-
 $(function() {
 	
-		
 		
 	var mousePosition;
 	var catsPosition;
@@ -20,8 +18,8 @@ $(function() {
 	
 	function geolocalisationHTML5(geoloc){
 		var location = new google.maps.LatLng(geoloc.coords.latitude, geoloc.coords.longitude);
-		console.log("geolocalisation HTML5" + catsPosition);
-		socket.emit('send:coordsMouse', { user: 'max', type: 'mouse', lat: catsPosition.lat(), lng: catsPosition.lng()});
+		console.log("geolocalisation HTML5" + location);
+		socket.emit('send:coordsMouse', { user: 'max', type: 'mouse', lat: location.lat(), lng: location.lng()});
 		return location;
 	}
 	
@@ -30,12 +28,10 @@ $(function() {
 		// require <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		if (google.loader.ClientLocation) {
 			var location = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
-			console.log("geolocalisation by ip");
+			console.log("geolocalisation by ip" + location);
 			return location;
 		}
 	}
-	
-	
 	
 	
 	/*
@@ -161,11 +157,11 @@ $(function() {
 	
 	
 	socket.on('load:coordsMouse', function (data) {
-			mousePosition = new google.maps.LatLng(data['lat'], data['lng']);
-			console.log("Position de la souris" + mousePosition);
-			calculateDistance(mousePosition, catsPosition);
-			refreshCatsScreen();
-		});
+		mousePosition = new google.maps.LatLng(data['lat'], data['lng']);
+		console.log("Position de la souris" + mousePosition);
+		calculateDistance(mousePosition, catsPosition);
+		refreshCatsScreen();
+	});
 	  
 	function pushPositionCats() {
 		socket.emit('send:coords', { user: 'max', type: 'cats', lat: catsPosition.lat(), lng: catsPosition.lng(), mesure: mesure });
