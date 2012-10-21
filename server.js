@@ -13,9 +13,10 @@ var port = 8080;
 // serve files on request
 function handler(request, response) {
     request.addListener('end', function() {
-        files.serve(request, response);
+        //files.serve(request, response);
     });
 }
+
  
 // listen for incoming connections from client
 io.sockets.on('connection', function (socket) {
@@ -25,7 +26,7 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('send:coordsMouse', function(data) {
   	console.log(data);
-  	socket.emit('load:coordsMouse', data);
+  	socket.broadcast.emit('load:coordsMouse', data);
   });
   
   // start listening for coords

@@ -20,8 +20,9 @@ $(function() {
 	
 	function geolocalisationHTML5(geoloc){
 		var location = new google.maps.LatLng(geoloc.coords.latitude, geoloc.coords.longitude);
-		console.log("geolocalisation HTML5" + catsPosition);
-		socket.emit('send:coordsMouse', { user: 'max', type: 'mouse', lat: catsPosition.lat(), lng: catsPosition.lng()});
+		mousePosition = location;
+		console.log("geolocalisation HTML5" + mousePosition);
+		socket.emit('send:coordsMouse', { user: 'max', type: 'mouse', lat: mousePosition.lat(), lng: mousePosition.lng(), date:$.now()});
 		return location;
 	}
 	
@@ -31,6 +32,7 @@ $(function() {
 		if (google.loader.ClientLocation) {
 			var location = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
 			console.log("geolocalisation by ip");
+			mousePosition = location;
 			return location;
 		}
 	}
@@ -50,43 +52,29 @@ $(function() {
 			return mousePosition;
 		});
 	}
-	function successLocalisationMouse() {
+	function successLocalisationMouse(geoloc) {
 		mousePosition = geolocalisationHTML5(geoloc);
+		console.log("Position souris :" + mousePosition);
+		return mousePosition;
 	}
+	
 	function geolocaliseMouse() {
 		if (geo) {
-			geo.watchPosition(successLocalisationMouse, mousePosition =geolocalisationIP());
+			geo.watchPosition(function(geoloc) {successLocalisationMouse(geoloc);}, function() {geolocalisationIP();});
 		}
 		else {
 			mousePosition = geolocalisationIP();
 		}
-		console.log("Position souris :" + mousePosition);
+		
 	}
 	
 	
 	
 	
 	function getCats() {
-		//localisation du chat
-	
-	// Position du visiteur geolocalisation
-	if (geo) {
-		geo.watchPosition(function(geoloc){
-			catsPosition = new google.maps.LatLng(geoloc.coords.latitude, geoloc.coords.longitude);
-			getMouse();
-			console.log("Position du chat (geolocalisation HTML5)" + catsPosition);
-			socket.on('load:coordsMouse', function (data) {
-					calculateDistance(mousePosition, catsPosition);
-					refreshCatsScreen();
-			});
-			pushPositionCats();
-			}, function(){
-				catsPosition = geolocalisationIP();
-			});
-		}
-		else {
-			catsPosition = geolocalisationIP();
-		}
+		socket.on('load:coords', function (data) {
+			catsPosition = new google.maps.LatLng(data['lat'], data['lng']);
+		});
 	}
 	
 	/*
@@ -173,13 +161,9 @@ $(function() {
 	 */
 	
 	
-	socket.on('load:coords', function (data) {
-		console.log(data);
-	});
+	
 	  
-	function pushPositionCats() {
-		socket.emit('send:coords', { user: 'max', type: 'cats', lat: catsPosition.lat(), lng: catsPosition.lng(), mesure: mesure });
-	}
-	    
+	 
 	getCats();
+	geolocaliseMouse();
 });
