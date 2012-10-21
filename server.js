@@ -5,7 +5,7 @@ var app = http.createServer(handler);
 var io = require('socket.io').listen(app);
 //io.set("origins","*");
 // define port
-var port = 8080;
+var port = process.env.PORT || 5000;
  
 // make html, js & css files accessible
 var files = new statichtml.Server('./public/');
