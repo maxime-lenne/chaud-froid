@@ -6,7 +6,7 @@
     "node-static": "*"
   },
   "engines": {
-    "node": "*",
-    "npm": "*"
+    "node": "0.8.12",
+    "npm": "1.1.49"
   }
 }
