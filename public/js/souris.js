@@ -13,7 +13,7 @@ $(function() {
 	var catsPosition = {};
 	var geocoder = new google.maps.Geocoder();
 	var geo = navigator.geolocation;
-	var socket = io.connect('http://localhost:8080/');
+	var socket = io.connect('http://localhost:5000/');
 	
 	
 	
