@@ -1,6 +1,6 @@
 {
   "name": "chaud-froid",
-  "version": "1.0",
+  "version": "1.0.0",
   "dependencies": {
     "socket.io": "0.9.10",
     "node-static": "0.6.4"
