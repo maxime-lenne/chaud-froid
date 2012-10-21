@@ -15,7 +15,7 @@ $(function() {
 	var geocoder = new google.maps.Geocoder();
 	var geo = navigator.geolocation;
 	var socket = io.connect('http://chaud-froid.maximelenne.c9.io');
-	io.set("origins","*");
+	
 	
 	
 	function geolocalisationHTML5(geoloc){
