@@ -18,9 +18,7 @@ $(function() {
 	
 	function geolocalisationHTML5(geoloc){
 		var location = new google.maps.LatLng(geoloc.coords.latitude, geoloc.coords.longitude);
-		console.log("geolocalisation HTML5" + location);
-		socket.emit('send:coordsMouse', { user: 'max', type: 'mouse', lat: location.lat(), lng: location.lng()});
-		return location;
+		console.log("geolocalisation HTML5 " + location);
 	}
 	
 	function geolocalisationIP(){
@@ -28,8 +26,7 @@ $(function() {
 		// require <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		if (google.loader.ClientLocation) {
 			var location = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
-			console.log("geolocalisation by ip" + location);
-			return location;
+			console.log("geolocalisation by ip " + location);
 		}
 	}
 	
@@ -52,9 +49,9 @@ $(function() {
 	function getCats() {
 		//localisation du chat
 	
-	// Position du visiteur geolocalisation
-	if (geo) {
-		geo.watchPosition(function(geoloc){
+		// Position du visiteur geolocalisation
+		if (geo) {
+			geo.watchPosition(function(geoloc){
 			catsPosition = new google.maps.LatLng(geoloc.coords.latitude, geoloc.coords.longitude);
 			getMouse();
 			console.log("Position du chat (geolocalisation HTML5)" + catsPosition);
