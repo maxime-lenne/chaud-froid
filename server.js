@@ -8,7 +8,7 @@ var io = require('socket.io').listen(app);
 var port = 8080;
  
 // make html, js & css files accessible
-var files = new statichtml.Server('./');
+var files = new statichtml.Server('./public/');
 var dataMouse = {user: 'max', type: 'mouse', lat: "50.6331543", lng: "3.0433570000000145"};
 var dataCats = {user: 'max', type: 'mouse', lat: "50.6331543", lng: "3.0433570000000145"};
 
